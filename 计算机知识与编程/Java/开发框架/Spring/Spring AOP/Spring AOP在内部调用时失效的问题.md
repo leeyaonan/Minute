@@ -47,14 +47,16 @@ Spring AOP是基于动态代理机制实现的，通过动态代理（默认是j
 @EnableAspectJAutoProxy(exposeProxy = true)
 ```
 
-
-
 ```java
 // SpringAOP内部调用时会失效，所以获取该对象的代理，来执行方法
 IOrderEventService currentProxy = (IOrderEventService) AopContext.currentProxy();
 if (FI_FIRST_STATUS_FOLLOW_UP.getCode().equals(current)) {
 	currentProxy.explanation(orderId);
 }
+```
+如果是配置文件的形式，可以在spring-context.xml中配置暴露代理对象
+```xml
+<aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
 ```
 
 ---
